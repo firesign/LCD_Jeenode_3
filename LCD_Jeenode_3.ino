@@ -1,4 +1,5 @@
 
+
 #include <Adafruit_GFX.h>    // Core graphics library
 #include <MCUFRIEND_kbv.h>   // Hardware-specific library
 MCUFRIEND_kbv tft;
@@ -17,6 +18,8 @@ SoftwareSerial mySerial(50, 51); // RX, TX
 #define GREEN   0x07E0
 #define WHITE   0xFFFF
 #define GREY    0x8410
+
+char time_buf[10];
 
 // RTC  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -122,6 +125,12 @@ void loop(void)
         tft.setFont(&OpenSans_Light50pt7b);
         tft.setTextSize(1);
         tft.print(dtostrf(temperature, 4, 1, cstr));
+
+        // timestamp
+        //sprintf(time_buf, "%02u:%02u", hr_12, minute());
+        showmsgXY(115, 38, 1, &OpenSans_Semibold10pt7b, "@");
+        tft.fillRect(135, 20, 60, 23, RED);
+        showmsgXY(139, 38, 1, &OpenSans_Semibold10pt7b, time_buf);
       }
 
       if (humidity > 0 && humidity <= 100 && temperature != 0.0) {
@@ -138,6 +147,7 @@ void loop(void)
           showmsgXY(210, 205, 1, &OpenSans_Light36pt7b, itoa(humidity, cstrb, 10));
           showmsgXY(268, 184, 1, &OpenSans_Light24pt7b, "%");
         }
+
         Serial.println();
       }
 
@@ -212,7 +222,7 @@ void loop(void)
 
   // Real Time Clock -------------------------------------------------------------
 
-  char time_buf[10];
+  //char time_buf[10];
   char day_buf[2];
 
   // 12-hour clock
