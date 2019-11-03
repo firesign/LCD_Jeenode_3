@@ -1,4 +1,5 @@
-
+//  LCD Jeenode for kitchen
+//  RTC disabled Nov 3 2019
 
 #include <Adafruit_GFX.h>    // Core graphics library
 #include <MCUFRIEND_kbv.h>   // Hardware-specific library
@@ -128,9 +129,9 @@ void loop(void)
 
         // timestamp
         //sprintf(time_buf, "%02u:%02u", hr_12, minute());
-        showmsgXY(115, 38, 1, &OpenSans_Semibold10pt7b, "@");
-        tft.fillRect(135, 20, 60, 23, RED);
-        showmsgXY(139, 38, 1, &OpenSans_Semibold10pt7b, time_buf);
+        //showmsgXY(115, 38, 1, &OpenSans_Semibold10pt7b, "@");
+        //tft.fillRect(135, 20, 60, 23, RED);
+        //showmsgXY(139, 38, 1, &OpenSans_Semibold10pt7b, time_buf);
       }
 
       if (humidity > 0 && humidity <= 100 && temperature != 0.0) {
@@ -235,33 +236,33 @@ void loop(void)
   else hr_12 = hr_24 % 12;
 
   // update hour and minute once every 60 seconds
-  if (minute() != oldMinute) {        // erase old minute
-    tft.fillRect(15, 366, 246, 77, RED);  // erase
-    oldMinute = minute();
-    // print new minute
-    sprintf(time_buf, "%02u:%02u", hr_12, minute());
-    showmsgXY(15, 440, 1, &OpenSans_Light50pt7b, time_buf);
-
-    // AM/PM
-    if (hr_24 < 12) {
-      // print "AM"
-      char hours12 = "AM";
-      tft.fillRect(270, 404, 35, 26, RED);  // erase
-      tft.setFont(&OpenSans_Semibold10pt7b);
-      tft.setCursor(274, 422);
-      tft.setTextColor(WHITE);
-      tft.print("AM");
-    }
-    else {
-      // print "PM"
-      char hours12 = "PM";
-      tft.fillRect(274, 404, 35, 26, RED);  // erase
-      tft.setFont(&OpenSans_Semibold10pt7b);
-      tft.setCursor(270, 422);
-      tft.setTextColor(WHITE);
-      tft.print("PM");
-    }
-  }
+//  if (minute() != oldMinute) {        // erase old minute
+//    tft.fillRect(15, 366, 246, 77, RED);  // erase
+//    oldMinute = minute();
+//    // print new minute
+//    sprintf(time_buf, "%02u:%02u", hr_12, minute());
+//    showmsgXY(15, 440, 1, &OpenSans_Light50pt7b, time_buf);
+//
+//    // AM/PM
+//    if (hr_24 < 12) {
+//      // print "AM"
+//      char hours12 = "AM";
+//      tft.fillRect(270, 404, 35, 26, RED);  // erase
+//      tft.setFont(&OpenSans_Semibold10pt7b);
+//      tft.setCursor(274, 422);
+//      tft.setTextColor(WHITE);
+//      tft.print("AM");
+//    }
+//    else {
+//      // print "PM"
+//      char hours12 = "PM";
+//      tft.fillRect(274, 404, 35, 26, RED);  // erase
+//      tft.setFont(&OpenSans_Semibold10pt7b);
+//      tft.setCursor(270, 422);
+//      tft.setTextColor(WHITE);
+//      tft.print("PM");
+//    }
+//  }
 }
 
 // FUNCTIONS --------------------------------------------------------------
